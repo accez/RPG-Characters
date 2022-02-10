@@ -1,8 +1,8 @@
 package com.company;
 
-public class Rouge extends Character{
+public class Rouge extends Character {
 
-    public Rouge(String name){
+    public Rouge(String name) {
         super(name);
         attribute.strength = 2;
         attribute.dexterity = 6;
