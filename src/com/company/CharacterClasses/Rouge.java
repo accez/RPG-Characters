@@ -14,7 +14,7 @@ public class Rouge extends Character {
     @Override
     public void levelUp() {
         int level = getLevel();
-        int strength =  attribute.getStrength();
+        int strength = attribute.getStrength();
         int dexterity = attribute.getDexterity();
         int intelligence = attribute.getIntelligence();
         level += 1;
