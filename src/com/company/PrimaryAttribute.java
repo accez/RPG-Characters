@@ -1,8 +1,8 @@
 package com.company;
 
 public class PrimaryAttribute {
-     int strength;
-     int dexterity;
-     int intelligence;
+    int strength;
+    int dexterity;
+    int intelligence;
 }
 

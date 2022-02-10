@@ -1,8 +1,8 @@
 package com.company;
 
-public class Mage extends Character{
+public class Mage extends Character {
 
-    public Mage(String name){
+    public Mage(String name) {
         super(name);
         attribute.strength = 1;
         attribute.dexterity = 1;
@@ -13,6 +13,6 @@ public class Mage extends Character{
     public void levelUp() {
         attribute.strength += 1;
         attribute.dexterity += 1;
-        attribute.intelligence +=5;
+        attribute.intelligence += 5;
     }
 }
