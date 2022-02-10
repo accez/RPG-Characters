@@ -10,6 +10,7 @@ public class Ranger extends Character {
 
     @Override
     public void levelUp() {
+        level += 1;
         attribute.strength += 1;
         attribute.dexterity += 5;
         attribute.intelligence += 1;

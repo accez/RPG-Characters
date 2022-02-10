@@ -11,6 +11,7 @@ public class Mage extends Character {
 
     @Override
     public void levelUp() {
+        level += 1;
         attribute.strength += 1;
         attribute.dexterity += 1;
         attribute.intelligence += 5;
