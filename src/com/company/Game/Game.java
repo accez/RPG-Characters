@@ -7,14 +7,15 @@ import com.company.CharacterClasses.Rouge;
 import com.company.CharacterClasses.Warrior;
 
 import java.util.Scanner;
+
 public class Game {
     GameDisplayTypes state;
     private Character character;
 
     public Game() {
-        if(!createCharacter()){
+        if (!createCharacter()) {
             createCharacter();
-        }else{
+        } else {
             mainMenu();
         }
     }
@@ -33,13 +34,12 @@ public class Game {
                 mainMenu();
                 break;
             case LEVEL:
-                System.out.println("Level: 5");
-                mainMenu();
+                levelUpOrDisplayLevel();
                 break;
             case STATS:
-                System.out.println("Strength: "+getCharacter().attribute.getStrength());
-                System.out.println("Dexterity: "+getCharacter().attribute.getDexterity());
-                System.out.println("Intelligence: "+getCharacter().attribute.getIntelligence());
+                System.out.println("Strength: " + getCharacter().attribute.getStrength());
+                System.out.println("Dexterity: " + getCharacter().attribute.getDexterity());
+                System.out.println("Intelligence: " + getCharacter().attribute.getIntelligence());
                 mainMenu();
                 break;
             case DPS:
@@ -95,7 +95,21 @@ public class Game {
         return false;
     }
 
-    
+    public void levelUpOrDisplayLevel() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1. Display level, 2. Level up");
+        int input = scanner.nextInt();
+        switch (input) {
+            case 1 -> {
+                System.out.println("You are level: " + getCharacter().getLevel());
+                mainMenu();
+            }
+            case 2 -> {
+                getCharacter().levelUp();
+                mainMenu();
+            }
+        }
+    }
 
     public Character getCharacter() {
         return character;
