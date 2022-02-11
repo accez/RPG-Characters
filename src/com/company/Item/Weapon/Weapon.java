@@ -1,12 +1,13 @@
-package com.company.Weapon;
+package com.company.Item.Weapon;
 
-import com.company.Item;
+import com.company.Character.Slot;
+import com.company.Item.Item;
 
 public class Weapon extends Item {
     WeaponTypes weaponTypes;
     private int damage;
     private int attackSpeed;
-    public Weapon(String name, int requiredLevel, String slot,WeaponTypes weaponTypes,int damage, int attackSpeed) {
+    public Weapon(String name, int requiredLevel, Slot slot, WeaponTypes weaponTypes, int damage, int attackSpeed) {
         super(name, requiredLevel, slot);
         this.weaponTypes = weaponTypes;
         this.damage = damage;

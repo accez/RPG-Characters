@@ -1,25 +1,24 @@
-package com.company.CharacterClasses;
+package com.company.Character.CharacterClasses;
 
-import com.company.Armor.Character.Character;
+import com.company.Character.Character;
 
-public class Rouge extends Character {
-
-    public Rouge(String name) {
+public class Ranger extends Character {
+    public Ranger(String name) {
         super(name);
-        attribute.setStrength(2);
-        attribute.setDexterity(6);
+        attribute.setStrength(1);
+        attribute.setDexterity(7);
         attribute.setIntelligence(1);
     }
 
     @Override
     public void levelUp() {
         int level = getLevel();
-        int strength = attribute.getStrength();
+        int strength =  attribute.getStrength();
         int dexterity = attribute.getDexterity();
         int intelligence = attribute.getIntelligence();
         level += 1;
         strength += 1;
-        dexterity += 4;
+        dexterity += 5;
         intelligence += 1;
         setLevel(level);
         attribute.setStrength(strength);

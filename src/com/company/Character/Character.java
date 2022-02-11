@@ -1,10 +1,13 @@
-package com.company.Armor.Character;
+package com.company.Character;
 
-import com.company.PrimaryAttribute;
+import com.company.Item.Item;
+
+import java.util.HashMap;
 
 public abstract class Character {
-    private String name;
+    final private String name;
     private int level;
+    final private HashMap<Slot, Item> equipment = new HashMap<>();
     public PrimaryAttribute attribute = new PrimaryAttribute();
 
     public Character(String name) {
@@ -12,11 +15,14 @@ public abstract class Character {
         this.level = 1;
     }
 
-    public int getLevel() {
+
+    public int getLevel()
+    {
         return level;
     }
 
     public void setLevel(int level) {
+
         this.level = level;
     }
 
@@ -25,4 +31,8 @@ public abstract class Character {
     }
 
     public abstract void levelUp();
+
+    public HashMap<Slot, Item> getEquipment() {
+        return equipment;
+    }
 }

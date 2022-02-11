@@ -1,12 +1,13 @@
-package com.company.Armor;
+package com.company.Item.Armor;
 
-import com.company.Item;
-import com.company.PrimaryAttribute;
+import com.company.Character.Slot;
+import com.company.Item.Item;
+import com.company.Character.PrimaryAttribute;
 
 public class Armor extends Item {
     ArmorTypes armorTypes;
     public PrimaryAttribute primaryAttribute = new PrimaryAttribute();
-    public Armor(String name, int requiredLevel, String slot,ArmorTypes armorTypes) {
+    public Armor(String name, int requiredLevel, Slot slot, ArmorTypes armorTypes) {
         super(name, requiredLevel, slot);
         this.armorTypes = armorTypes;
         primaryAttribute.setStrength(0);

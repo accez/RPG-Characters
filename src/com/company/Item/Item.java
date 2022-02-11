@@ -1,11 +1,13 @@
-package com.company;
+package com.company.Item;
+
+import com.company.Character.Slot;
 
 public abstract class Item {
     private String name;
     private int requiredLevel;
-    private String slot;
+    private Slot slot;
 
-    public Item(String name, int requiredLevel, String slot) {
+    public Item(String name, int requiredLevel, Slot slot) {
         this.name = name;
         this.requiredLevel = requiredLevel;
         this.slot = slot;
@@ -18,9 +20,6 @@ public abstract class Item {
         return requiredLevel;
     }
 
-    public String getSlot() {
-        return slot;
-    }
     public String setName(String name) {
         this.name = name;
         return name;
@@ -30,8 +29,12 @@ public abstract class Item {
         this.requiredLevel = requiredLevel;
     }
 
-    public void setSlot(String slot) {
-        this.slot = slot;
+
+    public Slot getSlot() {
+        return slot;
     }
 
+    public void setSlot(Slot slot) {
+        this.slot = slot;
+    }
 }

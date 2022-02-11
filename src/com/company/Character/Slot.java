@@ -1,4 +1,4 @@
-package com.company.Armor.Character;
+package com.company.Character;
 
 public enum Slot {
     HEAD,BODY,LEGS,WEAPON

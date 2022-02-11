@@ -1,13 +1,13 @@
-package com.company.CharacterClasses;
+package com.company.Character.CharacterClasses;
 
-import com.company.Armor.Character.Character;
+import com.company.Character.Character;
 
-public class Warrior extends Character {
-    public Warrior(String name) {
+public class Mage extends Character {
+    public Mage(String name) {
         super(name);
-        attribute.setStrength(5);
-        attribute.setDexterity(2);
-        attribute.setIntelligence(1);
+        attribute.setStrength(1);
+        attribute.setDexterity(1);
+        attribute.setIntelligence(8);
     }
 
     @Override
@@ -17,9 +17,9 @@ public class Warrior extends Character {
         int dexterity = attribute.getDexterity();
         int intelligence = attribute.getIntelligence();
         level += 1;
-        strength += 3;
-        dexterity += 2;
-        intelligence += 1;
+        strength += 1;
+        dexterity += 1;
+        intelligence += 5;
         setLevel(level);
         attribute.setStrength(strength);
         attribute.setDexterity(dexterity);
