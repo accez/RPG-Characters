@@ -3,7 +3,7 @@ package com.company.Armor;
 import com.company.Item;
 import com.company.PrimaryAttribute;
 
-public  class Armor extends Item {
+public class Armor extends Item {
     ArmorTypes armorTypes;
     public PrimaryAttribute primaryAttribute = new PrimaryAttribute();
     public Armor(String name, int requiredLevel, String slot,ArmorTypes armorTypes) {
