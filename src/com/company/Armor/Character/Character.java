@@ -1,4 +1,6 @@
-package com.company;
+package com.company.Armor.Character;
+
+import com.company.PrimaryAttribute;
 
 public abstract class Character {
     private String name;

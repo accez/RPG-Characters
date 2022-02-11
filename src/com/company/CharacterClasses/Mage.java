@@ -1,6 +1,6 @@
 package com.company.CharacterClasses;
 
-import com.company.Character;
+import com.company.Armor.Character.Character;
 
 public class Mage extends Character {
     public Mage(String name) {

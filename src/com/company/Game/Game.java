@@ -1,6 +1,6 @@
 package com.company.Game;
 
-import com.company.Character;
+import com.company.Armor.Character.Character;
 import com.company.CharacterClasses.Mage;
 import com.company.CharacterClasses.Ranger;
 import com.company.CharacterClasses.Rouge;
@@ -30,17 +30,13 @@ public class Game {
         }
         switch (state) {
             case NAME:
-                System.out.println(getCharacter().getName());
-                mainMenu();
+                displayUsername();
                 break;
             case LEVEL:
                 levelUpOrDisplayLevel();
                 break;
             case STATS:
-                System.out.println("Strength: " + getCharacter().attribute.getStrength());
-                System.out.println("Dexterity: " + getCharacter().attribute.getDexterity());
-                System.out.println("Intelligence: " + getCharacter().attribute.getIntelligence());
-                mainMenu();
+                displayUserStats();
                 break;
             case DPS:
                 System.out.println("OVER 9000");
@@ -93,6 +89,18 @@ public class Game {
             }
         }
         return false;
+    }
+
+    public void displayUserStats(){
+        System.out.println("Strength: " + getCharacter().attribute.getStrength());
+        System.out.println("Dexterity: " + getCharacter().attribute.getDexterity());
+        System.out.println("Intelligence: " + getCharacter().attribute.getIntelligence());
+        mainMenu();
+    }
+
+    public void displayUsername(){
+        System.out.println(getCharacter().getName());
+        mainMenu();
     }
 
     public void levelUpOrDisplayLevel() {
