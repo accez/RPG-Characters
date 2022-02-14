@@ -1,5 +1,6 @@
 package com.company.Game;
 
+import com.company.Character.TotalAttribute;
 import com.company.Item.Armor.Armor;
 import com.company.Item.Armor.ArmorTypes;
 import com.company.Character.Character;
@@ -70,9 +71,20 @@ public class Game {
         armor.primaryAttribute.setIntelligence(intelligence);
         character.getEquipment().put(armor.getSlot(), armor);
         character.getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
+        updateTotalAttributes(armor);
         mainMenu();
     }
 
+    public void updateTotalAttributes(Armor armor){
+        int totalStrength = armor.primaryAttribute.getStrength() + character.attribute.getStrength();
+        int totalDexterity = armor.primaryAttribute.getDexterity() + character.attribute.getDexterity();
+        int totalIntelligence = armor.primaryAttribute.getIntelligence() + character.attribute.getIntelligence();
+        character.totalAttribute.setStrength(totalStrength);
+        character.totalAttribute.setDexterity(totalDexterity);
+        character.totalAttribute.setIntelligence(totalIntelligence);
+
+        System.out.println(character.totalAttribute.getStrength());
+    }
     public void equipWeapon(String name, int requiredLevel,Slot slot, WeaponTypes weaponTypes,int damage, int attackSpeed) {
         Weapon weapon = new Weapon(name,requiredLevel,slot,weaponTypes,damage,attackSpeed);
         character.getEquipment().put(weapon.getSlot(), weapon);
@@ -246,10 +258,17 @@ public class Game {
     }
 
     public void displayUserStats() {
-        System.out.println("Strength: " + getCharacter().attribute.getStrength());
-        System.out.println("Dexterity: " + getCharacter().attribute.getDexterity());
-        System.out.println("Intelligence: " + getCharacter().attribute.getIntelligence());
-        mainMenu();
+        if(character.getEquipment().isEmpty()){
+            System.out.println("Strength: " + getCharacter().attribute.getStrength());
+            System.out.println("Dexterity: " + getCharacter().attribute.getDexterity());
+            System.out.println("Intelligence: " + getCharacter().attribute.getIntelligence());
+            mainMenu();
+        }else{
+            System.out.println("Strength: " + getCharacter().totalAttribute.getStrength());
+            System.out.println("Dexterity: " + getCharacter().totalAttribute.getDexterity());
+            System.out.println("Intelligence: " + getCharacter().totalAttribute.getIntelligence());
+            mainMenu();
+        }
     }
 
     public void displayUsername() {
