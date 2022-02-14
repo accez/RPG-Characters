@@ -4,8 +4,9 @@ import com.company.Character.Character;
 
 public class Rouge extends Character {
 
-    public Rouge(String name) {
-        super(name);
+    public Rouge(String name,HeroType heroType) {
+        super(name, heroType);
+
         attribute.setStrength(2);
         attribute.setDexterity(6);
         attribute.setIntelligence(1);

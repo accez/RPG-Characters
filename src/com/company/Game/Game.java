@@ -1,14 +1,10 @@
 package com.company.Game;
 
-import com.company.Character.TotalAttribute;
+import com.company.Character.CharacterClasses.*;
 import com.company.Item.Armor.Armor;
 import com.company.Item.Armor.ArmorTypes;
 import com.company.Character.Character;
 import com.company.Character.Slot;
-import com.company.Character.CharacterClasses.Mage;
-import com.company.Character.CharacterClasses.Ranger;
-import com.company.Character.CharacterClasses.Rouge;
-import com.company.Character.CharacterClasses.Warrior;
 import com.company.Item.Weapon.Weapon;
 import com.company.Item.Weapon.WeaponTypes;
 
@@ -176,8 +172,6 @@ public class Game {
         }
     }
 
-
-
     public void createItem(Slot slot, ArmorTypes armorType, WeaponTypes weaponTypes){
         String[] items = {"Basic", "Great", "Master"};
         ArrayList<String> createdItems = new ArrayList<>();
@@ -230,25 +224,25 @@ public class Game {
         int chooseClass = scanner.nextInt();
         switch (chooseClass) {
             case 1 -> {
-                Mage mage = new Mage(name);
+                Mage mage = new Mage(name, HeroType.MAGE);
                 System.out.println("You created a Mage with the name " + mage.getName());
                 setCharacter(mage);
                 return true;
             }
             case 2 -> {
-                Ranger ranger = new Ranger(name);
+                Ranger ranger = new Ranger(name, HeroType.RANGER);
                 System.out.println("You created a Ranger with the name " + ranger.getName());
                 setCharacter(ranger);
                 return true;
             }
             case 3 -> {
-                Rouge rouge = new Rouge(name);
+                Rouge rouge = new Rouge(name, HeroType.ROUGE);
                 System.out.println("You created a Rouge with the name " + rouge.getName());
                 setCharacter(rouge);
                 return true;
             }
             case 4 -> {
-                Warrior warrior = new Warrior(name);
+                Warrior warrior = new Warrior(name, HeroType.WARRIOR);
                 System.out.println("You created a Warrior with the name " + warrior.getName());
                 setCharacter(warrior);
                 return true;
