@@ -62,13 +62,19 @@ public class Game {
 
     public void equipArmor(String name, int requiredLevel,Slot slot, ArmorTypes armorTypes,int strength,int dexterity, int intelligence) {
         Armor armor = new Armor(name, requiredLevel, slot, armorTypes);
-        armor.primaryAttribute.setStrength(strength);
-        armor.primaryAttribute.setDexterity(dexterity);
-        armor.primaryAttribute.setIntelligence(intelligence);
-        character.getEquipment().put(armor.getSlot(), armor);
-        character.getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
-        updateTotalAttributes(armor);
-        mainMenu();
+        if(character.getLevel() >= armor.getRequiredLevel()){
+            armor.primaryAttribute.setStrength(strength);
+            armor.primaryAttribute.setDexterity(dexterity);
+            armor.primaryAttribute.setIntelligence(intelligence);
+            character.getEquipment().put(armor.getSlot(), armor);
+            character.getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
+            updateTotalAttributes(armor);
+            mainMenu();
+        }else{
+            System.out.println("Not enough level! You need  to be level " + armor.getRequiredLevel());
+            mainMenu();
+        }
+
     }
 
     public void updateTotalAttributes(Armor armor){
@@ -78,8 +84,6 @@ public class Game {
         character.totalAttribute.setStrength(totalStrength);
         character.totalAttribute.setDexterity(totalDexterity);
         character.totalAttribute.setIntelligence(totalIntelligence);
-
-        System.out.println(character.totalAttribute.getStrength());
     }
     public void equipWeapon(String name, int requiredLevel,Slot slot, WeaponTypes weaponTypes,int damage, int attackSpeed) {
         Weapon weapon = new Weapon(name,requiredLevel,slot,weaponTypes,damage,attackSpeed);
@@ -88,7 +92,7 @@ public class Game {
             character.getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
             mainMenu();
         }else{
-            System.out.println("Not enough level need to be level " + weapon.getRequiredLevel());
+            System.out.println("Not enough level! You need to be level " + weapon.getRequiredLevel());
             mainMenu();
         }
 
@@ -167,23 +171,41 @@ public class Game {
                     createItem(getSlot(),getArmorTypes(),weaponTypes);
                 }else{
                     System.out.println("You need to be a mage to equip that");
+                    selectArmorType();
                 }
             }
             case 2 -> {
-                setArmorTypes(ArmorTypes.LEATHER);
-                createItem(getSlot(),getArmorTypes(),weaponTypes);
+                if(character.getHeroType() == HeroType.RANGER){
+                    setArmorTypes(ArmorTypes.LEATHER);
+                    createItem(getSlot(),getArmorTypes(),weaponTypes);
+                }else if(character.getHeroType() == HeroType.ROUGE){
+                    setArmorTypes(ArmorTypes.LEATHER);
+                    createItem(getSlot(),getArmorTypes(),weaponTypes);
+                }else{
+                    System.out.println("You need to be a rouge or a ranger to equip that");
+                    selectArmorType();
+                }
             }
             case 3 -> {
-                setArmorTypes(ArmorTypes.MAIL);
-                createItem(getSlot(),getArmorTypes(),weaponTypes);
+                if(character.getHeroType() != HeroType.MAGE){
+                    setArmorTypes(ArmorTypes.MAIL);
+                    createItem(getSlot(),getArmorTypes(),weaponTypes);
+                }else{
+                    System.out.println("You need to be a rouge, ranger or a warrior to equip that");
+                    selectArmorType();
+                }
             }
             case 4 -> {
-                setArmorTypes(ArmorTypes.PLATE);
-                createItem(getSlot(),getArmorTypes(),weaponTypes);
+                if (character.getHeroType() == HeroType.WARRIOR){
+                    setArmorTypes(ArmorTypes.PLATE);
+                    createItem(getSlot(),getArmorTypes(),weaponTypes);
+                }else{
+                    System.out.println("You need to be a warrior to equip that");
+                    selectArmorType();
+                }
             }
         }
     }
-
 
     public void createItem(Slot slot, ArmorTypes armorType, WeaponTypes weaponTypes){
         String[] items = {"Basic", "Great", "Master"};
