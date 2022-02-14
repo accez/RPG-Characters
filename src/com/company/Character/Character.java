@@ -9,6 +9,7 @@ public abstract class Character {
     private int level;
     final private HashMap<Slot, Item> equipment = new HashMap<>();
     public PrimaryAttribute attribute = new PrimaryAttribute();
+    public TotalAttribute totalAttribute = new TotalAttribute();
 
     public Character(String name) {
         this.name = name;
