@@ -3,8 +3,9 @@ package com.company.Character.CharacterClasses;
 import com.company.Character.Character;
 
 public class Mage extends Character {
-    public Mage(String name, HeroType heroType) {
-        super(name, heroType);
+
+    public Mage(String name, HeroType heroType,MainPrimaryAttribute mainPrimaryAttribute) {
+        super(name, heroType, mainPrimaryAttribute);
         attribute.setStrength(1);
         attribute.setDexterity(1);
         attribute.setIntelligence(8);

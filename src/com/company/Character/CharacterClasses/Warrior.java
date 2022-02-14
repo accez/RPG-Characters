@@ -3,8 +3,8 @@ package com.company.Character.CharacterClasses;
 import com.company.Character.Character;
 
 public class Warrior extends Character {
-    public Warrior(String name,HeroType heroType) {
-        super(name, heroType);
+    public Warrior(String name,HeroType heroType, MainPrimaryAttribute mainPrimaryAttribute) {
+        super(name, heroType, mainPrimaryAttribute);
         attribute.setStrength(5);
         attribute.setDexterity(2);
         attribute.setIntelligence(1);
