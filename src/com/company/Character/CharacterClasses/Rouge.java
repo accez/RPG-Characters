@@ -26,5 +26,8 @@ public class Rouge extends Character {
         attribute.setStrength(strength);
         attribute.setDexterity(dexterity);
         attribute.setIntelligence(intelligence);
+        totalAttribute.setStrength(strength);
+        totalAttribute.setDexterity(dexterity);
+        totalAttribute.setIntelligence(intelligence);
     }
 }
