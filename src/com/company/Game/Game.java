@@ -19,6 +19,7 @@ public class Game {
     private Slot slot;
     private ArmorTypes armorTypes;
     private WeaponTypes weaponTypes;
+    private Weapon weapon;
 
     public Game() {
         if (!createCharacter()) {
@@ -48,7 +49,7 @@ public class Game {
                 displayUserStats();
                 break;
             case DPS:
-                System.out.println("OVER 9000");
+                System.out.println(characterDPS(character.getMainPrimaryAttribute()));
                 mainMenu();
                 break;
             case EQUIPMENT:
@@ -85,8 +86,9 @@ public class Game {
         character.totalAttribute.setDexterity(totalDexterity);
         character.totalAttribute.setIntelligence(totalIntelligence);
     }
+
     public void equipWeapon(String name, int requiredLevel,Slot slot, WeaponTypes weaponTypes,int damage, int attackSpeed) {
-        Weapon weapon = new Weapon(name,requiredLevel,slot,weaponTypes,damage,attackSpeed);
+       weapon = new Weapon(name,requiredLevel,slot,weaponTypes,damage,attackSpeed);
         if(character.getLevel() >= weapon.getRequiredLevel()){
             character.getEquipment().put(weapon.getSlot(), weapon);
             character.getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
@@ -96,6 +98,21 @@ public class Game {
             mainMenu();
         }
 
+    }
+
+    public double characterDPS(MainPrimaryAttribute mainPrimaryAttribute){
+        if(weapon != null){
+                if (mainPrimaryAttribute == MainPrimaryAttribute.STRENGTH){
+                    return weapon.dps() * (1 + character.totalAttribute.getStrength() / 100d);
+                }
+                if (mainPrimaryAttribute == MainPrimaryAttribute.DEXTERITY){
+                    return weapon.dps() * (1 + character.totalAttribute.getDexterity() / 100d);
+                }
+                if (mainPrimaryAttribute == MainPrimaryAttribute.INTELLIGENCE){
+                    return weapon.dps() * (1 + character.totalAttribute.getIntelligence() / 100d);
+                }
+        }
+        return 0;
     }
 
     public void selectItemSlot() {
@@ -259,25 +276,25 @@ public class Game {
         int chooseClass = scanner.nextInt();
         switch (chooseClass) {
             case 1 -> {
-                Mage mage = new Mage(name, HeroType.MAGE);
+                Mage mage = new Mage(name, HeroType.MAGE, MainPrimaryAttribute.INTELLIGENCE);
                 System.out.println("You created a Mage with the name " + mage.getName());
                 setCharacter(mage);
                 return true;
             }
             case 2 -> {
-                Ranger ranger = new Ranger(name, HeroType.RANGER);
+                Ranger ranger = new Ranger(name, HeroType.RANGER, MainPrimaryAttribute.DEXTERITY);
                 System.out.println("You created a Ranger with the name " + ranger.getName());
                 setCharacter(ranger);
                 return true;
             }
             case 3 -> {
-                Rouge rouge = new Rouge(name, HeroType.ROUGE);
+                Rouge rouge = new Rouge(name, HeroType.ROUGE, MainPrimaryAttribute.DEXTERITY);
                 System.out.println("You created a Rouge with the name " + rouge.getName());
                 setCharacter(rouge);
                 return true;
             }
             case 4 -> {
-                Warrior warrior = new Warrior(name, HeroType.WARRIOR);
+                Warrior warrior = new Warrior(name, HeroType.WARRIOR,MainPrimaryAttribute.STRENGTH);
                 System.out.println("You created a Warrior with the name " + warrior.getName());
                 setCharacter(warrior);
                 return true;
