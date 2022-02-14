@@ -39,4 +39,12 @@ public abstract class Character {
     public HashMap<Slot, Item> getEquipment() {
         return equipment;
     }
+
+    public HeroType getHeroType() {
+        return heroType;
+    }
+
+    public void setHeroType(HeroType heroType) {
+        this.heroType = heroType;
+    }
 }

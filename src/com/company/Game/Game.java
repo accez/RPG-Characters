@@ -83,9 +83,15 @@ public class Game {
     }
     public void equipWeapon(String name, int requiredLevel,Slot slot, WeaponTypes weaponTypes,int damage, int attackSpeed) {
         Weapon weapon = new Weapon(name,requiredLevel,slot,weaponTypes,damage,attackSpeed);
-        character.getEquipment().put(weapon.getSlot(), weapon);
-        character.getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
-        mainMenu();
+        if(character.getLevel() >= weapon.getRequiredLevel()){
+            character.getEquipment().put(weapon.getSlot(), weapon);
+            character.getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
+            mainMenu();
+        }else{
+            System.out.println("Not enough level need to be level " + weapon.getRequiredLevel());
+            mainMenu();
+        }
+
     }
 
     public void selectItemSlot() {
@@ -117,34 +123,36 @@ public class Game {
         System.out.println("Select your weapon type(1. Axe, 2. Bow, 3. Dagger, 4. Hammer, 5. Staffs, 6. Swords, 7. Wands)");
         int input = scanner.nextInt();
         switch (input) {
-            case 1 -> {
-                setWeaponTypes(WeaponTypes.AXES);
-                createItem(getSlot(),armorTypes,getWeaponTypes());
-            }
-            case 2 -> {
-                setWeaponTypes(WeaponTypes.BOWS);
-                createItem(getSlot(),armorTypes,getWeaponTypes());
-            }
-            case 3 -> {
-                setWeaponTypes(WeaponTypes.DAGGERS);
-                createItem(getSlot(),armorTypes,getWeaponTypes());
-            }
-            case 4 -> {
-                setWeaponTypes(WeaponTypes.HAMMERS);
-                createItem(getSlot(),armorTypes,getWeaponTypes());
-            }
-            case 5 -> {
-                setWeaponTypes(WeaponTypes.STAFFS);
-                createItem(getSlot(),armorTypes,getWeaponTypes());
-            }
+            case 1 -> checkIfHeroCanUseWeapon(HeroType.WARRIOR,WeaponTypes.AXES);
+            case 2 -> checkIfHeroCanUseWeapon(HeroType.RANGER,WeaponTypes.BOWS);
+            case 3 -> checkIfHeroCanUseWeapon(HeroType.ROUGE,WeaponTypes.DAGGERS);
+            case 4 -> checkIfHeroCanUseWeapon(HeroType.WARRIOR,WeaponTypes.HAMMERS);
+            case 5 -> checkIfHeroCanUseWeapon(HeroType.MAGE,WeaponTypes.STAFFS);
             case 6 -> {
-                setWeaponTypes(WeaponTypes.SWORDS);
-                createItem(getSlot(),armorTypes,getWeaponTypes());
+                if(character.getHeroType() == HeroType.WARRIOR){
+                    setWeaponTypes(weaponTypes);
+                    createItem(getSlot(),armorTypes,getWeaponTypes());
+                }else if (character.getHeroType() == HeroType.ROUGE){
+                    setWeaponTypes(weaponTypes);
+                    createItem(getSlot(),armorTypes,getWeaponTypes());
+                }else{
+                    System.out.println("You need to be a warrior or a rouge to equip that");
+                    selectWeaponType();
+                }
             }
-            case 7 -> {
-                setWeaponTypes(WeaponTypes.WANDS);
-                createItem(getSlot(),armorTypes,getWeaponTypes());
-            }
+            case 7 -> checkIfHeroCanUseWeapon(HeroType.MAGE,WeaponTypes.WANDS);
+        }
+    }
+
+    public void checkIfHeroCanUseWeapon(HeroType heroType, WeaponTypes weaponTypes){
+        String heroTypeToString = heroType.toString().toLowerCase(Locale.ROOT);
+        String weaponTypeToString = weaponTypes.toString().toLowerCase(Locale.ROOT);
+        if(character.getHeroType() == heroType){
+            setWeaponTypes(weaponTypes);
+            createItem(getSlot(),armorTypes,getWeaponTypes());
+        }else{
+            System.out.println("You need to be a " + heroTypeToString+" in order to equip " + weaponTypeToString );
+            selectWeaponType();
         }
     }
 
@@ -154,8 +162,12 @@ public class Game {
         int input = scanner.nextInt();
         switch (input) {
             case 1 -> {
-                setArmorTypes(ArmorTypes.CLOTH);
-                createItem(getSlot(),getArmorTypes(),weaponTypes);
+                if(character.getHeroType() == HeroType.MAGE){
+                    setArmorTypes(ArmorTypes.CLOTH);
+                    createItem(getSlot(),getArmorTypes(),weaponTypes);
+                }else{
+                    System.out.println("You need to be a mage to equip that");
+                }
             }
             case 2 -> {
                 setArmorTypes(ArmorTypes.LEATHER);
@@ -171,6 +183,7 @@ public class Game {
             }
         }
     }
+
 
     public void createItem(Slot slot, ArmorTypes armorType, WeaponTypes weaponTypes){
         String[] items = {"Basic", "Great", "Master"};
