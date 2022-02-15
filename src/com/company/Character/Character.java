@@ -15,15 +15,14 @@ public abstract class Character {
     public PrimaryAttribute attribute = new PrimaryAttribute();
     public TotalAttribute totalAttribute = new TotalAttribute();
 
-    public Character(String name,HeroType heroType, MainPrimaryAttribute mainPrimaryAttribute) {
+    public Character(String name, HeroType heroType, MainPrimaryAttribute mainPrimaryAttribute) {
         this.name = name;
         this.heroType = heroType;
         this.mainPrimaryAttribute = mainPrimaryAttribute;
         this.level = 1;
     }
 
-    public int getLevel()
-    {
+    public int getLevel() {
         return level;
     }
 
@@ -50,7 +49,7 @@ public abstract class Character {
         this.heroType = heroType;
     }
 
-    public void setMainPrimaryAttribute(MainPrimaryAttribute mainPrimaryAttribute){
+    public void setMainPrimaryAttribute(MainPrimaryAttribute mainPrimaryAttribute) {
         this.mainPrimaryAttribute = mainPrimaryAttribute;
     }
 
