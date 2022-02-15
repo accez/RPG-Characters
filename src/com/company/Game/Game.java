@@ -90,14 +90,14 @@ public class Game {
         character.totalAttribute.setIntelligence(totalIntelligence);
     }
 
-    public void equipWeapon(String name, int requiredLevel, Slot slot, WeaponTypes weaponTypes, int damage, int attackSpeed) throws InvalidLevel{
+    public void equipWeapon(String name, int requiredLevel, Slot slot, WeaponTypes weaponTypes, int damage, int attackSpeed) throws InvalidLevel {
         weapon = new Weapon(name, requiredLevel, slot, weaponTypes, damage, attackSpeed);
         if (character.getLevel() >= weapon.getRequiredLevel()) {
             character.getEquipment().put(weapon.getSlot(), weapon);
             character.getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
             mainMenu();
         } else {
-            throw  new InvalidLevel("Not enough level! You need to be level " + weapon.getRequiredLevel());
+            throw new InvalidLevel("Not enough level! You need to be level " + weapon.getRequiredLevel());
         }
 
     }
@@ -151,7 +151,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Select your weapon type(1. Axe, 2. Bow, 3. Dagger, 4. Hammer, 5. Staffs, 6. Swords, 7. Wands)");
         int input = scanner.nextInt();
-        try{
+        try {
             switch (input) {
                 case 1 -> checkIfHeroCanUseWeapon(HeroType.WARRIOR, WeaponTypes.AXES);
                 case 2 -> checkIfHeroCanUseWeapon(HeroType.RANGER, WeaponTypes.BOWS);
@@ -161,14 +161,14 @@ public class Game {
                 case 6 -> checkIfHeroCanUseSword();
                 case 7 -> checkIfHeroCanUseWeapon(HeroType.MAGE, WeaponTypes.WANDS);
             }
-        }catch (InvalidWeapon e){
+        } catch (InvalidWeapon e) {
             e.printStackTrace();
             selectWeaponType();
         }
 
     }
 
-    public void checkIfHeroCanUseSword() throws InvalidWeapon{
+    public void checkIfHeroCanUseSword() throws InvalidWeapon {
         if (character.getHeroType() == HeroType.WARRIOR) {
             setWeaponTypes(weaponTypes);
             createItem(getSlot(), armorTypes, getWeaponTypes());
@@ -180,7 +180,7 @@ public class Game {
         }
     }
 
-    public void checkIfHeroCanUseWeapon(HeroType heroType, WeaponTypes weaponTypes) throws InvalidWeapon{
+    public void checkIfHeroCanUseWeapon(HeroType heroType, WeaponTypes weaponTypes) throws InvalidWeapon {
         String heroTypeToString = heroType.toString().toLowerCase(Locale.ROOT);
         String weaponTypeToString = weaponTypes.toString().toLowerCase(Locale.ROOT);
         if (character.getHeroType() == heroType) {
@@ -247,13 +247,13 @@ public class Game {
             }
             Scanner scanner = new Scanner(System.in);
             int input = scanner.nextInt();
-            try{
+            try {
                 switch (input) {
                     case 1 -> equipWeapon(createdItems.get(0), 1, slot, weaponTypes, 2, 2);
                     case 2 -> equipWeapon(createdItems.get(1), 5, slot, weaponTypes, 5, 5);
                     case 3 -> equipWeapon(createdItems.get(2), 10, slot, weaponTypes, 10, 10);
                 }
-            }catch (InvalidLevel e){
+            } catch (InvalidLevel e) {
                 e.printStackTrace();
                 mainMenu();
             }
@@ -266,13 +266,13 @@ public class Game {
             }
             Scanner scanner = new Scanner(System.in);
             int input = scanner.nextInt();
-            try{
+            try {
                 switch (input) {
                     case 1 -> equipArmor(createdItems.get(0), 1, slot, armorTypes, 2, 2, 2);
                     case 2 -> equipArmor(createdItems.get(1), 5, slot, armorTypes, 5, 5, 5);
                     case 3 -> equipArmor(createdItems.get(2), 10, slot, armorTypes, 10, 10, 10);
                 }
-            }catch (InvalidLevel e){
+            } catch (InvalidLevel e) {
                 e.printStackTrace();
                 mainMenu();
             }
