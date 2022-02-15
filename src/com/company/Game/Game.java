@@ -4,7 +4,6 @@ import com.company.Character.CharacterClasses.*;
 import com.company.ErrorHandling.InvalidArmor;
 import com.company.ErrorHandling.InvalidLevel;
 import com.company.ErrorHandling.InvalidWeapon;
-import com.company.Item.Armor.Armor;
 import com.company.Item.Armor.ArmorTypes;
 import com.company.Character.Character;
 import com.company.Character.Slot;
@@ -62,44 +61,6 @@ public class Game {
             case EXIT:
                 break;
         }
-    }
-
-    public void equipArmor(String name, int requiredLevel, Slot slot, ArmorTypes armorTypes, int strength, int dexterity, int intelligence) throws InvalidLevel {
-        Armor armor = new Armor(name, requiredLevel, slot, armorTypes);
-        if (character.getLevel() >= armor.getRequiredLevel()) {
-            armor.primaryAttribute.setStrength(strength);
-            armor.primaryAttribute.setDexterity(dexterity);
-            armor.primaryAttribute.setIntelligence(intelligence);
-            character.getEquipment().put(armor.getSlot(), armor);
-            character.getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
-            updateTotalAttributes(armor);
-            mainMenu();
-        } else {
-            throw new InvalidLevel("Not enough level! You need  to be level " + armor.getRequiredLevel());
-
-        }
-
-    }
-
-    public void updateTotalAttributes(Armor armor) {
-        int totalStrength = armor.primaryAttribute.getStrength() + character.attribute.getStrength();
-        int totalDexterity = armor.primaryAttribute.getDexterity() + character.attribute.getDexterity();
-        int totalIntelligence = armor.primaryAttribute.getIntelligence() + character.attribute.getIntelligence();
-        character.totalAttribute.setStrength(totalStrength);
-        character.totalAttribute.setDexterity(totalDexterity);
-        character.totalAttribute.setIntelligence(totalIntelligence);
-    }
-
-    public void equipWeapon(String name, int requiredLevel, Slot slot, WeaponTypes weaponTypes, int damage, int attackSpeed) throws InvalidLevel {
-        weapon = new Weapon(name, requiredLevel, slot, weaponTypes, damage, attackSpeed);
-        if (character.getLevel() >= weapon.getRequiredLevel()) {
-            character.getEquipment().put(weapon.getSlot(), weapon);
-            character.getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
-            mainMenu();
-        } else {
-            throw new InvalidLevel("Not enough level! You need to be level " + weapon.getRequiredLevel());
-        }
-
     }
 
     public double characterDPS(MainPrimaryAttribute mainPrimaryAttribute) {
@@ -249,9 +210,18 @@ public class Game {
             int input = scanner.nextInt();
             try {
                 switch (input) {
-                    case 1 -> equipWeapon(createdItems.get(0), 1, slot, weaponTypes, 2, 2);
-                    case 2 -> equipWeapon(createdItems.get(1), 5, slot, weaponTypes, 5, 5);
-                    case 3 -> equipWeapon(createdItems.get(2), 10, slot, weaponTypes, 10, 10);
+                    case 1 -> {
+                        character.equipWeapon(createdItems.get(0), 1, slot, weaponTypes, 2, 2);
+                        mainMenu();
+                    }
+                    case 2 -> {
+                        character.equipWeapon(createdItems.get(1), 5, slot, weaponTypes, 5, 5);
+                        mainMenu();
+                    }
+                    case 3 -> {
+                        character.equipWeapon(createdItems.get(2), 10, slot, weaponTypes, 10, 10);
+                        mainMenu();
+                    }
                 }
             } catch (InvalidLevel e) {
                 e.printStackTrace();
@@ -268,9 +238,18 @@ public class Game {
             int input = scanner.nextInt();
             try {
                 switch (input) {
-                    case 1 -> equipArmor(createdItems.get(0), 1, slot, armorTypes, 2, 2, 2);
-                    case 2 -> equipArmor(createdItems.get(1), 5, slot, armorTypes, 5, 5, 5);
-                    case 3 -> equipArmor(createdItems.get(2), 10, slot, armorTypes, 10, 10, 10);
+                    case 1 -> {
+                        character.equipArmor(createdItems.get(0), 1, slot, armorTypes, 2, 2, 2);
+                        mainMenu();
+                    }
+                    case 2 -> {
+                        character.equipArmor(createdItems.get(1), 5, slot, armorTypes, 5, 5, 5);
+                        mainMenu();
+                    }
+                    case 3 -> {
+                        character.equipArmor(createdItems.get(2), 10, slot, armorTypes, 10, 10, 10);
+                        mainMenu();
+                    }
                 }
             } catch (InvalidLevel e) {
                 e.printStackTrace();
