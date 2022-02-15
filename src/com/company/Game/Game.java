@@ -2,6 +2,7 @@ package com.company.Game;
 
 import com.company.Character.CharacterClasses.*;
 import com.company.ErrorHandling.InvalidArmor;
+import com.company.ErrorHandling.InvalidLevel;
 import com.company.ErrorHandling.InvalidWeapon;
 import com.company.Item.Armor.Armor;
 import com.company.Item.Armor.ArmorTypes;
@@ -63,7 +64,7 @@ public class Game {
         }
     }
 
-    public void equipArmor(String name, int requiredLevel, Slot slot, ArmorTypes armorTypes, int strength, int dexterity, int intelligence) {
+    public void equipArmor(String name, int requiredLevel, Slot slot, ArmorTypes armorTypes, int strength, int dexterity, int intelligence) throws InvalidLevel {
         Armor armor = new Armor(name, requiredLevel, slot, armorTypes);
         if (character.getLevel() >= armor.getRequiredLevel()) {
             armor.primaryAttribute.setStrength(strength);
@@ -74,8 +75,8 @@ public class Game {
             updateTotalAttributes(armor);
             mainMenu();
         } else {
-            System.out.println("Not enough level! You need  to be level " + armor.getRequiredLevel());
-            mainMenu();
+            throw new InvalidLevel("Not enough level! You need  to be level " + armor.getRequiredLevel());
+
         }
 
     }
@@ -89,15 +90,14 @@ public class Game {
         character.totalAttribute.setIntelligence(totalIntelligence);
     }
 
-    public void equipWeapon(String name, int requiredLevel, Slot slot, WeaponTypes weaponTypes, int damage, int attackSpeed) {
+    public void equipWeapon(String name, int requiredLevel, Slot slot, WeaponTypes weaponTypes, int damage, int attackSpeed) throws InvalidLevel{
         weapon = new Weapon(name, requiredLevel, slot, weaponTypes, damage, attackSpeed);
         if (character.getLevel() >= weapon.getRequiredLevel()) {
             character.getEquipment().put(weapon.getSlot(), weapon);
             character.getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
             mainMenu();
         } else {
-            System.out.println("Not enough level! You need to be level " + weapon.getRequiredLevel());
-            mainMenu();
+            throw  new InvalidLevel("Not enough level! You need to be level " + weapon.getRequiredLevel());
         }
 
     }
@@ -247,10 +247,15 @@ public class Game {
             }
             Scanner scanner = new Scanner(System.in);
             int input = scanner.nextInt();
-            switch (input) {
-                case 1 -> equipWeapon(createdItems.get(0), 1, slot, weaponTypes, 2, 2);
-                case 2 -> equipWeapon(createdItems.get(1), 5, slot, weaponTypes, 5, 5);
-                case 3 -> equipWeapon(createdItems.get(2), 10, slot, weaponTypes, 10, 10);
+            try{
+                switch (input) {
+                    case 1 -> equipWeapon(createdItems.get(0), 1, slot, weaponTypes, 2, 2);
+                    case 2 -> equipWeapon(createdItems.get(1), 5, slot, weaponTypes, 5, 5);
+                    case 3 -> equipWeapon(createdItems.get(2), 10, slot, weaponTypes, 10, 10);
+                }
+            }catch (InvalidLevel e){
+                e.printStackTrace();
+                mainMenu();
             }
         } else {
             System.out.println("Select your armor:");
@@ -261,11 +266,17 @@ public class Game {
             }
             Scanner scanner = new Scanner(System.in);
             int input = scanner.nextInt();
-            switch (input) {
-                case 1 -> equipArmor(createdItems.get(0), 1, slot, armorTypes, 2, 2, 2);
-                case 2 -> equipArmor(createdItems.get(1), 5, slot, armorTypes, 5, 5, 5);
-                case 3 -> equipArmor(createdItems.get(2), 10, slot, armorTypes, 10, 10, 10);
+            try{
+                switch (input) {
+                    case 1 -> equipArmor(createdItems.get(0), 1, slot, armorTypes, 2, 2, 2);
+                    case 2 -> equipArmor(createdItems.get(1), 5, slot, armorTypes, 5, 5, 5);
+                    case 3 -> equipArmor(createdItems.get(2), 10, slot, armorTypes, 10, 10, 10);
+                }
+            }catch (InvalidLevel e){
+                e.printStackTrace();
+                mainMenu();
             }
+
         }
     }
 
