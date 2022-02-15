@@ -7,16 +7,17 @@ import com.company.Item.Item;
 import java.util.HashMap;
 
 public abstract class Character {
-    final private String name;
+    private String name;
     private int level;
     private HeroType heroType;
     private MainPrimaryAttribute mainPrimaryAttribute;
-    final private HashMap<Slot, Item> equipment = new HashMap<>();
+    private HashMap<Slot, Item> equipment = new HashMap<>();
     public PrimaryAttribute attribute = new PrimaryAttribute();
     public TotalAttribute totalAttribute = new TotalAttribute();
 
     public Character(String name, HeroType heroType, MainPrimaryAttribute mainPrimaryAttribute) {
-        this.name = name;
+        setName(name);
+        setHeroType(heroType);
         this.heroType = heroType;
         this.mainPrimaryAttribute = mainPrimaryAttribute;
         this.level = 1;
@@ -55,5 +56,13 @@ public abstract class Character {
 
     public MainPrimaryAttribute getMainPrimaryAttribute() {
         return mainPrimaryAttribute;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEquipment(HashMap<Slot, Item> equipment) {
+        this.equipment = equipment;
     }
 }

@@ -10,7 +10,7 @@ public class Armor extends Item {
 
     public Armor(String name, int requiredLevel, Slot slot, ArmorTypes armorTypes) {
         super(name, requiredLevel, slot);
-        this.armorTypes = armorTypes;
+        setArmorTypes(armorTypes);
         primaryAttribute.setStrength(0);
         primaryAttribute.setDexterity(0);
         primaryAttribute.setIntelligence(0);

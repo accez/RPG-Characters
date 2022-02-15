@@ -10,9 +10,9 @@ public class Weapon extends Item {
 
     public Weapon(String name, int requiredLevel, Slot slot, WeaponTypes weaponTypes, int damage, int attackSpeed) {
         super(name, requiredLevel, slot);
-        this.weaponTypes = weaponTypes;
-        this.damage = damage;
-        this.attackSpeed = attackSpeed;
+        setWeaponTypes(weaponTypes);
+        setDamage(damage);
+        setAttackSpeed(attackSpeed);
     }
 
     public WeaponTypes getWeaponTypes() {
@@ -24,7 +24,7 @@ public class Weapon extends Item {
     }
 
     public int dps() {
-        return damage * attackSpeed;
+        return getDamage() * getAttackSpeed();
     }
 
     public int getDamage() {

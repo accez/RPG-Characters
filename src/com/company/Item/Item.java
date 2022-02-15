@@ -8,9 +8,9 @@ public abstract class Item {
     private Slot slot;
 
     public Item(String name, int requiredLevel, Slot slot) {
-        this.name = name;
-        this.requiredLevel = requiredLevel;
-        this.slot = slot;
+        setName(name);
+        setRequiredLevel(requiredLevel);
+        setSlot(slot);
     }
 
     public String getName() {
