@@ -12,6 +12,7 @@ public abstract class Item {
         this.requiredLevel = requiredLevel;
         this.slot = slot;
     }
+
     public String getName() {
         return name;
     }

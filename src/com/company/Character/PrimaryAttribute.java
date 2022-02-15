@@ -1,9 +1,9 @@
 package com.company.Character;
 
 public class PrimaryAttribute {
-     private int strength;
-     private int dexterity;
-     private int intelligence;
+    private int strength;
+    private int dexterity;
+    private int intelligence;
 
     public int getStrength() {
         return strength;

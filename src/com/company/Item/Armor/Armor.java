@@ -7,6 +7,7 @@ import com.company.Character.PrimaryAttribute;
 public class Armor extends Item {
     ArmorTypes armorTypes;
     public PrimaryAttribute primaryAttribute = new PrimaryAttribute();
+
     public Armor(String name, int requiredLevel, Slot slot, ArmorTypes armorTypes) {
         super(name, requiredLevel, slot);
         this.armorTypes = armorTypes;
