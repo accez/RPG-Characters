@@ -30,7 +30,6 @@ public abstract class Item {
         this.requiredLevel = requiredLevel;
     }
 
-
     public Slot getSlot() {
         return slot;
     }
