@@ -36,10 +36,14 @@ public abstract class Character {
     }
 
     public double calculateDpsWithWeaponAndNoArmor(MainPrimaryAttribute mainPrimaryAttribute){
-        return calculateDpsWithTotalAttributeOrAttribute(mainPrimaryAttribute, attribute.getStrength(), attribute.getDexterity(), attribute.getIntelligence());
+        if (!getWeaponHashMap().isEmpty() && getArmorHashMap().isEmpty()) {
+            return calculateDpsWithTotalAttributeOrAttribute(mainPrimaryAttribute, attribute.getStrength(), attribute.getDexterity(), attribute.getIntelligence());
+        }
+        return 0;
     }
 
-    public double calculateDpsWithArmor(MainPrimaryAttribute mainPrimaryAttribute){
+    public double calculateDpsWithArmorAndNoWeapon(MainPrimaryAttribute mainPrimaryAttribute){
+        if(!getArmorHashMap().isEmpty() && getWeaponHashMap().isEmpty()) {
             if (mainPrimaryAttribute == MainPrimaryAttribute.STRENGTH) {
                 System.out.println(totalAttribute.getStrength());
                 return (1 + totalAttribute.getStrength() / 100d);
@@ -49,25 +53,31 @@ public abstract class Character {
             }
             if (mainPrimaryAttribute == MainPrimaryAttribute.INTELLIGENCE) {
                 return (1 + totalAttribute.getIntelligence() / 100d);
+            }
         }
         return 0;
     }
 
     public double calculateDpsWithNoArmorOrWeapon(MainPrimaryAttribute mainPrimaryAttribute){
-        if (mainPrimaryAttribute == MainPrimaryAttribute.STRENGTH) {
-            return (1 + attribute.getStrength() / 100d);
-        }
-        if (mainPrimaryAttribute == MainPrimaryAttribute.DEXTERITY) {
-            return (1 + attribute.getStrength() / 100d);
-        }
-        if (mainPrimaryAttribute == MainPrimaryAttribute.INTELLIGENCE) {
-            return (1 + attribute.getStrength() / 100d);
+        if(getWeaponHashMap().isEmpty() && getArmorHashMap().isEmpty()){
+            if (mainPrimaryAttribute == MainPrimaryAttribute.STRENGTH) {
+                return (1 + attribute.getStrength() / 100d);
+            }
+            if (mainPrimaryAttribute == MainPrimaryAttribute.DEXTERITY) {
+                return (1 + attribute.getStrength() / 100d);
+            }
+            if (mainPrimaryAttribute == MainPrimaryAttribute.INTELLIGENCE) {
+                return (1 + attribute.getStrength() / 100d);
+            }
         }
         return 0;
     }
 
     public double calculateDpsWithArmorAndWeapon(MainPrimaryAttribute mainPrimaryAttribute){
-        return calculateDpsWithTotalAttributeOrAttribute(mainPrimaryAttribute, totalAttribute.getStrength(), totalAttribute.getDexterity(), totalAttribute.getIntelligence());
+        if(!getArmorHashMap().isEmpty() && !getWeaponHashMap().isEmpty()) {
+            return calculateDpsWithTotalAttributeOrAttribute(mainPrimaryAttribute, totalAttribute.getStrength(), totalAttribute.getDexterity(), totalAttribute.getIntelligence());
+        }
+        return 0;
     }
 
     private double calculateDpsWithTotalAttributeOrAttribute(MainPrimaryAttribute mainPrimaryAttribute, int strength, int dexterity, int intelligence) {
@@ -87,13 +97,13 @@ public abstract class Character {
         if (!getWeaponHashMap().isEmpty() && getArmorHashMap().isEmpty()) {
             System.out.println(calculateDpsWithWeaponAndNoArmor(getMainPrimaryAttribute()));
         }
-        else if(!getArmorHashMap().isEmpty() && getWeaponHashMap().isEmpty()){
-            System.out.println(calculateDpsWithArmor(getMainPrimaryAttribute()));
+        if(!getArmorHashMap().isEmpty() && getWeaponHashMap().isEmpty()) {
+            System.out.println(calculateDpsWithArmorAndNoWeapon(getMainPrimaryAttribute()));
         }
-        else if(!getArmorHashMap().isEmpty() && !getWeaponHashMap().isEmpty()){
+        if(!getArmorHashMap().isEmpty() && !getWeaponHashMap().isEmpty()) {
             System.out.println(calculateDpsWithArmorAndWeapon(getMainPrimaryAttribute()));
         }
-        else{
+        if(getWeaponHashMap().isEmpty() && getArmorHashMap().isEmpty()){
             System.out.println(calculateDpsWithNoArmorOrWeapon(getMainPrimaryAttribute()));
         }
     }
@@ -216,7 +226,6 @@ public abstract class Character {
         totalAttribute.setStrength(totalStrength);
         totalAttribute.setDexterity(totalDexterity);
         totalAttribute.setIntelligence(totalIntelligence);
-        System.out.println(totalAttribute.getStrength());
     }
 
     public HashMap<Slot, Item> getEquipment() {
