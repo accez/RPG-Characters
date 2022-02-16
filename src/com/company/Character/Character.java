@@ -23,8 +23,8 @@ public abstract class Character {
     private ArmorTypes armorTypes;
     private MainPrimaryAttribute mainPrimaryAttribute;
     private HashMap<Slot,Weapon> weaponHashMap = new HashMap<>();
-    private HashMap<Slot, Armor> armorHashMap = new HashMap<>();
-    private HashMap<Slot, Item> equipment = new HashMap<>();
+    final private HashMap<Slot, Armor> armorHashMap = new HashMap<>();
+    final private HashMap<Slot, Item> equipment = new HashMap<>();
     public PrimaryAttribute attribute = new PrimaryAttribute();
     public TotalAttribute totalAttribute = new TotalAttribute();
 
@@ -246,9 +246,6 @@ public abstract class Character {
         this.name = name;
     }
 
-    public void setEquipment(HashMap<Slot, Item> equipment) {
-        this.equipment = equipment;
-    }
 
     public WeaponTypes getWeaponTypes() {
         return weaponTypes;
@@ -278,9 +275,6 @@ public abstract class Character {
         return armorHashMap;
     }
 
-    public void setArmorHashMap(HashMap<Slot, Armor> armorHashMap) {
-        this.armorHashMap = armorHashMap;
-    }
     public int getLevel() {
         return level;
     }
