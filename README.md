@@ -21,7 +21,7 @@ Go to the project directory
 Start the application
 
 ```bash
-  Run the main.java file or press shift f10 to start the application. 
+  Run the main.java to start the application. 
 ```
 
 
