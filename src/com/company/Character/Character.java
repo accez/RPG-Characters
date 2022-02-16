@@ -22,7 +22,7 @@ public abstract class Character {
     private WeaponTypes weaponTypes;
     private ArmorTypes armorTypes;
     private MainPrimaryAttribute mainPrimaryAttribute;
-    private HashMap<Slot,Weapon> weaponHashMap = new HashMap<>();
+    private HashMap<Slot, Weapon> weaponHashMap = new HashMap<>();
     final private HashMap<Slot, Armor> armorHashMap = new HashMap<>();
     final private HashMap<Slot, Item> equipment = new HashMap<>();
     public PrimaryAttribute attribute = new PrimaryAttribute();
@@ -35,15 +35,15 @@ public abstract class Character {
         this.level = 1;
     }
 
-    public double calculateDpsWithWeaponAndNoArmor(MainPrimaryAttribute mainPrimaryAttribute){
+    public double calculateDpsWithWeaponAndNoArmor(MainPrimaryAttribute mainPrimaryAttribute) {
         if (!getWeaponHashMap().isEmpty() && getArmorHashMap().isEmpty()) {
             return calculateDpsWithTotalAttributeOrAttribute(mainPrimaryAttribute, attribute.getStrength(), attribute.getDexterity(), attribute.getIntelligence());
         }
         return 0;
     }
 
-    public double calculateDpsWithArmorAndNoWeapon(MainPrimaryAttribute mainPrimaryAttribute){
-        if(!getArmorHashMap().isEmpty() && getWeaponHashMap().isEmpty()) {
+    public double calculateDpsWithArmorAndNoWeapon(MainPrimaryAttribute mainPrimaryAttribute) {
+        if (!getArmorHashMap().isEmpty() && getWeaponHashMap().isEmpty()) {
             if (mainPrimaryAttribute == MainPrimaryAttribute.STRENGTH) {
                 System.out.println(totalAttribute.getStrength());
                 return (1 + totalAttribute.getStrength() / 100d);
@@ -58,8 +58,8 @@ public abstract class Character {
         return 0;
     }
 
-    public double calculateDpsWithNoArmorOrWeapon(MainPrimaryAttribute mainPrimaryAttribute){
-        if(getWeaponHashMap().isEmpty() && getArmorHashMap().isEmpty()){
+    public double calculateDpsWithNoArmorOrWeapon(MainPrimaryAttribute mainPrimaryAttribute) {
+        if (getWeaponHashMap().isEmpty() && getArmorHashMap().isEmpty()) {
             if (mainPrimaryAttribute == MainPrimaryAttribute.STRENGTH) {
                 return (1 + attribute.getStrength() / 100d);
             }
@@ -73,8 +73,8 @@ public abstract class Character {
         return 0;
     }
 
-    public double calculateDpsWithArmorAndWeapon(MainPrimaryAttribute mainPrimaryAttribute){
-        if(!getArmorHashMap().isEmpty() && !getWeaponHashMap().isEmpty()) {
+    public double calculateDpsWithArmorAndWeapon(MainPrimaryAttribute mainPrimaryAttribute) {
+        if (!getArmorHashMap().isEmpty() && !getWeaponHashMap().isEmpty()) {
             return calculateDpsWithTotalAttributeOrAttribute(mainPrimaryAttribute, totalAttribute.getStrength(), totalAttribute.getDexterity(), totalAttribute.getIntelligence());
         }
         return 0;
@@ -97,20 +97,20 @@ public abstract class Character {
         if (!getWeaponHashMap().isEmpty() && getArmorHashMap().isEmpty()) {
             System.out.println(calculateDpsWithWeaponAndNoArmor(getMainPrimaryAttribute()));
         }
-        if(!getArmorHashMap().isEmpty() && getWeaponHashMap().isEmpty()) {
+        if (!getArmorHashMap().isEmpty() && getWeaponHashMap().isEmpty()) {
             System.out.println(calculateDpsWithArmorAndNoWeapon(getMainPrimaryAttribute()));
         }
-        if(!getArmorHashMap().isEmpty() && !getWeaponHashMap().isEmpty()) {
+        if (!getArmorHashMap().isEmpty() && !getWeaponHashMap().isEmpty()) {
             System.out.println(calculateDpsWithArmorAndWeapon(getMainPrimaryAttribute()));
         }
-        if(getWeaponHashMap().isEmpty() && getArmorHashMap().isEmpty()){
+        if (getWeaponHashMap().isEmpty() && getArmorHashMap().isEmpty()) {
             System.out.println(calculateDpsWithNoArmorOrWeapon(getMainPrimaryAttribute()));
         }
     }
 
     public abstract void levelUp();
 
-    public boolean checkIfCharacterCanUseClothArmor(HeroType heroType)throws InvalidArmor{
+    public boolean checkIfCharacterCanUseClothArmor(HeroType heroType) throws InvalidArmor {
         if (heroType == HeroType.MAGE) {
             setArmorTypes(ArmorTypes.CLOTH);
             return true;
@@ -119,7 +119,7 @@ public abstract class Character {
         }
     }
 
-    public boolean checkIfCharacterCanUseLeatherArmor(HeroType heroType) throws InvalidArmor{
+    public boolean checkIfCharacterCanUseLeatherArmor(HeroType heroType) throws InvalidArmor {
         if (heroType == HeroType.ROUGE || heroType == HeroType.RANGER) {
             setArmorTypes(ArmorTypes.LEATHER);
             return true;
@@ -128,7 +128,7 @@ public abstract class Character {
         }
     }
 
-    public boolean checkIfCharacterCanUseMailArmor(HeroType heroType) throws InvalidArmor{
+    public boolean checkIfCharacterCanUseMailArmor(HeroType heroType) throws InvalidArmor {
         if (heroType != HeroType.MAGE) {
             setArmorTypes(ArmorTypes.MAIL);
             return true;
@@ -138,10 +138,10 @@ public abstract class Character {
     }
 
     public boolean checkIfCharacterCanUsePlateArmor(HeroType heroType) throws InvalidArmor {
-        if(heroType == HeroType.WARRIOR){
+        if (heroType == HeroType.WARRIOR) {
             setArmorTypes(ArmorTypes.PLATE);
             return true;
-        }else{
+        } else {
             throw new InvalidArmor("You need to be a warrior to equip that");
         }
     }
@@ -169,8 +169,8 @@ public abstract class Character {
         Weapon weapon = new Weapon(name, requiredLevel, slot, weaponTypes, damage, attackSpeed);
         if (getLevel() >= weapon.getRequiredLevel()) {
             HashMap<Slot, Weapon> weaponHash = new HashMap<>();
-            weaponHash.put(weapon.getSlot(),weapon);
-            getEquipment().put(weapon.getSlot(),weapon);
+            weaponHash.put(weapon.getSlot(), weapon);
+            getEquipment().put(weapon.getSlot(), weapon);
             setWeaponHashMap(weaponHash);
             getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
             getWeaponHashMap().forEach((key, value) -> System.out.println(key + " WeaponHash  " + value.getName()));
@@ -186,28 +186,28 @@ public abstract class Character {
             armor.primaryAttribute.setStrength(strength);
             armor.primaryAttribute.setDexterity(dexterity);
             armor.primaryAttribute.setIntelligence(intelligence);
-            getEquipment().put(armor.getSlot(),armor);
-            getArmorHashMap().put(armor.getSlot(),armor);
+            getEquipment().put(armor.getSlot(), armor);
+            getArmorHashMap().put(armor.getSlot(), armor);
             getEquipment().forEach((key, value) -> System.out.println(key + " " + value.getName()));
-            updateTotalAttributes(getTotalStrengthFromArmor(),getTotalDexterityFromArmor(),getTotalIntelligenceFromArmor());
+            updateTotalAttributes(getTotalStrengthFromArmor(), getTotalDexterityFromArmor(), getTotalIntelligenceFromArmor());
         } else {
             throw new InvalidLevel("Not enough level! You need  to be level " + armor.getRequiredLevel());
         }
     }
 
-    public int getTotalStrengthFromArmor(){
+    public int getTotalStrengthFromArmor() {
         AtomicInteger totalStrength = new AtomicInteger();
         getArmorHashMap().forEach((key, value) -> totalStrength.addAndGet(value.primaryAttribute.getStrength()));
         return totalStrength.intValue();
     }
 
-    public int getTotalDexterityFromArmor(){
+    public int getTotalDexterityFromArmor() {
         AtomicInteger totalDexterity = new AtomicInteger();
         getArmorHashMap().forEach((key, value) -> totalDexterity.addAndGet(value.primaryAttribute.getDexterity()));
         return totalDexterity.intValue();
     }
 
-    public int getTotalIntelligenceFromArmor(){
+    public int getTotalIntelligenceFromArmor() {
         AtomicInteger totalIntelligence = new AtomicInteger();
         getArmorHashMap().forEach((key, value) -> totalIntelligence.addAndGet(value.primaryAttribute.getIntelligence()));
         return totalIntelligence.intValue();
