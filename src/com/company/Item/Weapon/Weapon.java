@@ -4,7 +4,7 @@ import com.company.Character.Slot;
 import com.company.Item.Item;
 
 public class Weapon extends Item {
-    WeaponTypes weaponTypes;
+    private WeaponTypes weaponTypes;
     private int damage;
     private int attackSpeed;
 
