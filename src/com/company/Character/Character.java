@@ -197,25 +197,19 @@ public abstract class Character {
 
     public int getTotalStrengthFromArmor(){
         AtomicInteger totalStrength = new AtomicInteger();
-        getArmorHashMap().forEach((key, value) -> {
-            totalStrength.addAndGet(value.primaryAttribute.getStrength());
-        });
+        getArmorHashMap().forEach((key, value) -> totalStrength.addAndGet(value.primaryAttribute.getStrength()));
         return totalStrength.intValue();
     }
 
     public int getTotalDexterityFromArmor(){
         AtomicInteger totalDexterity = new AtomicInteger();
-        getArmorHashMap().forEach((key, value) -> {
-            totalDexterity.addAndGet(value.primaryAttribute.getDexterity());
-        });
+        getArmorHashMap().forEach((key, value) -> totalDexterity.addAndGet(value.primaryAttribute.getDexterity()));
         return totalDexterity.intValue();
     }
 
     public int getTotalIntelligenceFromArmor(){
         AtomicInteger totalIntelligence = new AtomicInteger();
-        getArmorHashMap().forEach((key, value) -> {
-            totalIntelligence.addAndGet(value.primaryAttribute.getIntelligence());
-        });
+        getArmorHashMap().forEach((key, value) -> totalIntelligence.addAndGet(value.primaryAttribute.getIntelligence()));
         return totalIntelligence.intValue();
     }
 
